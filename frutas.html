@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Puesto de Don Efraín · Parte A (JS tradicional)</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 720px; margin: 40px auto; padding: 0 16px; color: #222; }
+  h1 { font-size: 1.4rem; }
+  table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+  th, td { padding: 8px 10px; text-align: right; border-bottom: 1px solid #ddd; }
+  th:first-child, td:first-child { text-align: left; }
+  thead th { background: #f4f4f4; }
+  .totales { margin-top: 20px; display: flex; gap: 24px; }
+  .totales div { background: #f4f4f4; padding: 12px 16px; border-radius: 8px; }
+  .totales strong { display: block; font-size: 1.3rem; }
+  .mensaje { margin-top: 16px; padding: 10px 14px; background: #fff3cd; border: 1px solid #ffe08a; border-radius: 8px; font-weight: bold; }
+  button { cursor: pointer; padding: 4px 10px; border-radius: 6px; border: 1px solid #ccc; background: #fff; }
+  button:hover { background: #eee; }
+</style>
+</head>
+<body>
+  <h1>Puesto de Don Efraín · Inventario del día (Parte A · sin framework)</h1>
+  <table>
+    <thead>
+      <tr><th>Producto</th><th>Precio</th><th>Cantidad</th><th>Subtotal</th><th>Acciones</th></tr>
+    </thead>
+    <tbody id="tabla-cuerpo"></tbody>
+  </table>
+
+  <div class="totales">
+    <div>Total en dinero<strong id="total-dinero"></strong></div>
+    <div>Unidades en el puesto<strong id="total-unidades"></strong></div>
+  </div>
+
+  <div id="mensaje-mayorista" class="mensaje" style="display:none;">Jornada de venta mayorista</div>
+
+<script>
+  // Estado: el mismo array se muta directamente (así se hacía "antes" del framework)
+  const productos = [
+    { nombre: "Mango",     precio: 1800, cantidad: 12 },
+    { nombre: "Guayaba",   precio: 1200, cantidad: 8 },
+    { nombre: "Patilla",   precio: 6500, cantidad: 2 },
+    { nombre: "Maracuyá",  precio: 3400, cantidad: 5 },
+    { nombre: "Níspero",   precio: 2900, cantidad: 4 },
+  ];
+
+  function formatearPesos(valor) {
+    return valor.toLocaleString("es-CO");
+  }
+
+  function render() {
+    const cuerpo = document.getElementById("tabla-cuerpo");
+    cuerpo.innerHTML = "";
+
+    let totalDinero = 0;
+    let totalUnidades = 0;
+
+    productos.forEach((producto, indice) => {
+      const subtotal = producto.precio * producto.cantidad;
+      totalDinero += subtotal;
+      totalUnidades += producto.cantidad;
+
+      const fila = document.createElement("tr");
+      fila.innerHTML = `
+        <td>${producto.nombre}</td>
+        <td>${formatearPesos(producto.precio)}</td>
+        <td>${producto.cantidad}</td>
+        <td>${formatearPesos(subtotal)}</td>
+        <td><button data-indice="${indice}">Vender 1</button></td>
+      `;
+      cuerpo.appendChild(fila);
+    });
+
+    document.getElementById("total-dinero").textContent = formatearPesos(totalDinero);
+    document.getElementById("total-unidades").textContent = totalUnidades;
+
+    const mensaje = document.getElementById("mensaje-mayorista");
+    mensaje.style.display = totalDinero > 50000 ? "block" : "none";
+
+    // Los botones se recrean en cada render, así que se reenganchan los listeners
+    cuerpo.querySelectorAll("button").forEach(boton => {
+      boton.addEventListener("click", () => {
+        const i = Number(boton.dataset.indice);
+        if (productos[i].cantidad > 0) {
+          productos[i].cantidad -= 1;
+          render();
+        }
+      });
+    });
+  }
+
+  render();
+</script>
+</body>
+</html>

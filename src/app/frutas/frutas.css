@@ -1,0 +1,101 @@
+:host {
+  display: block;
+  font-family: system-ui, sans-serif;
+  max-width: 720px;
+  margin: 40px auto;
+  padding: 0 16px;
+  color: #222;
+}
+
+h2 {
+  font-size: 1.4rem;
+  margin-bottom: 0;
+}
+
+.subtitulo {
+  margin-top: 4px;
+  color: #666;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+}
+
+th,
+td {
+  padding: 8px 10px;
+  text-align: right;
+  border-bottom: 1px solid #ddd;
+}
+
+th:first-child,
+td:first-child {
+  text-align: left;
+}
+
+thead th {
+  background: #f4f4f4;
+}
+
+tr.agotado {
+  opacity: 0.4;
+}
+
+.totales {
+  margin-top: 20px;
+  display: flex;
+  gap: 24px;
+}
+
+.tarjeta {
+  background: #1e293b;
+  color: #fff;
+  padding: 12px 16px;
+  border-radius: 8px;
+}
+
+.tarjeta--clara {
+  background: #f4f4f4;
+  color: #222;
+}
+
+.etiqueta {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.8;
+}
+
+.tarjeta strong {
+  display: block;
+  font-size: 1.4rem;
+}
+
+.mensaje {
+  margin-top: 16px;
+  padding: 10px 14px;
+  background: #fff3cd;
+  border: 1px solid #ffe08a;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+button {
+  cursor: pointer;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #fff;
+}
+
+button:hover:not(:disabled) {
+  background: #eee;
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
