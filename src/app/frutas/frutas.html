@@ -12,7 +12,6 @@
     </tr>
   </thead>
   <tbody>
-    <!-- Requisito 1: una fila por fruta. Sin track, NG5002. -->
     @for (p of productos(); track p.nombre) {
       <tr [class.agotado]="p.cantidad === 0">
         <td>{{ p.nombre }}</td>
@@ -40,7 +39,6 @@
   </div>
 </div>
 
-<!-- Requisito 5: aparece y desaparece solo, según el total. -->
 @if (totalDinero() > 50000) {
   <div class="mensaje">Jornada de venta mayorista</div>
 }

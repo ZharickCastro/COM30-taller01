@@ -35,7 +35,6 @@
   <div id="mensaje-mayorista" class="mensaje" style="display:none;">Jornada de venta mayorista</div>
 
 <script>
-  // Estado: el mismo array se muta directamente (así se hacía "antes" del framework)
   const productos = [
     { nombre: "Mango",     precio: 1800, cantidad: 12 },
     { nombre: "Guayaba",   precio: 1200, cantidad: 8 },
@@ -77,7 +76,6 @@
     const mensaje = document.getElementById("mensaje-mayorista");
     mensaje.style.display = totalDinero > 50000 ? "block" : "none";
 
-    // Los botones se recrean en cada render, así que se reenganchan los listeners
     cuerpo.querySelectorAll("button").forEach(boton => {
       boton.addEventListener("click", () => {
         const i = Number(boton.dataset.indice);

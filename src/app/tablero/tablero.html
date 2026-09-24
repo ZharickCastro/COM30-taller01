@@ -12,7 +12,6 @@
     </tr>
   </thead>
   <tbody>
-    <!-- Reto 5: se recorre ordenados(), no productos(), para mostrar de mayor a menor subtotal -->
     @for (p of ordenados(); track p.nombre) {
       <tr [class.agotado]="p.cantidad === 0">
         <td>{{ p.nombre }}</td>
@@ -24,7 +23,6 @@
             Vender 1
           </button>
           <button type="button" (click)="reabastecer(p.nombre)">+10</button>
-          <!-- Reto 4: vender todo lo que queda de esa fila -->
           <button
             type="button"
             class="peligro"
@@ -48,21 +46,18 @@
     <span class="etiqueta">Unidades en el puesto</span>
     <strong>{{ unidades() }}</strong>
   </div>
-  <!-- Reto 1: contar los productos agotados -->
   <div class="tarjeta tarjeta--clara">
     <span class="etiqueta">Productos agotados</span>
     <strong>{{ agotados() }}</strong>
   </div>
 </div>
 
-<!-- Reto 3: el producto más caro -->
 @if (masCaro(); as p) {
   <p class="destacado">Producto más caro: {{ p.nombre }} ({{ p.precio }})</p>
 } @else {
   <p class="destacado">No hay productos en el tablero.</p>
 }
 
-<!-- Reto 2: aviso de inventario bajo -->
 @if (inventarioBajo()) {
   <div class="aviso">Inventario bajo: hay productos con 1 o 2 unidades.</div>
 }
